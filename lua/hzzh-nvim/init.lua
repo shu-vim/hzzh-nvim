@@ -13,7 +13,7 @@ M.execute = function()
 	local ok, prevmatchid = pcall(vim.api.nvim_win_get_var, win, 'prevmatchid')
 	if ok and prevmatchid ~= -1 then
 		vim.fn.matchdelete(prevmatchid)
-		vim.api.nvim_win_set_var(win, 'prevmatchid', prevmatchid)
+		vim.api.nvim_win_del_var(win, 'prevmatchid')
 	end
 
 	local hOfhz = '[[:alpha:]]'
