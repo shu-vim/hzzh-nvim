@@ -16,6 +16,11 @@ return { "shu-vim/hzzh-nvim" }
 
 Enabled by default on startup.
 
+```vim
+:HZZHEnable
+:HZZHDisable
+```
+
 ## Setup/Config
 
 ### Default config

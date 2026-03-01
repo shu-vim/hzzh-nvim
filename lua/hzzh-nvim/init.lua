@@ -6,6 +6,8 @@ M.config = {
 	leading_zen = '、。：「『（【＜',
 }
 
+M.enabled = true
+
 M.setup = function(args) M.config = vim.tbl_deep_extend('force', M.config, args or {}) end
 
 M.execute = function()
@@ -16,6 +18,8 @@ M.execute = function()
 		vim.api.nvim_win_del_var(win, 'prevmatchid')
 	end
 
+	if not M.enabled then return end
+
 	local hOfhz = '[[:alpha:]]'
 	local zOfhz = '[^\\u0-\\u7f' .. M.config.trailing_zen .. ']'
 	local zOfzh = '[^\\u0-\\u7f' .. M.config.leading_zen .. ']'
@@ -25,12 +29,8 @@ M.execute = function()
 	vim.api.nvim_win_set_var(win, 'prevmatchid', vim.fn.matchadd(M.config.highlight, pattern, 0, -1))
 end
 
--- \v([[:alnum:]]@<=[^\u0-\u7f])|([^\u0-\u7f、。：]@<=[[:alnum:]])
--- あああ123いいいabc。
+-- あああaaaいいいiii
+-- 「aaa」
 -- 'あああ'
-
-vim.api.nvim_create_autocmd('WinEnter', {
-	callback = M.execute,
-})
 
 return M
