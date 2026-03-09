@@ -20,6 +20,8 @@ M.build_regexp = function()
 	return pattern
 end
 
+M.search = function() vim.fn.setreg('/', M.build_regexp()) end
+
 M.execute = function()
 	local win = vim.api.nvim_get_current_win()
 	local ok, prevmatchid = pcall(vim.api.nvim_win_get_var, win, 'prevmatchid')

@@ -14,4 +14,6 @@ vim.api.nvim_create_user_command('HZZHDisable', function()
 	M.execute()
 end, {})
 
+vim.api.nvim_create_user_command('HZZHSearch', function() M.search() end, {})
+
 -- vim: set et ft=lua sts=4 sw=4 ts=4 :
