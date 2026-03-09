@@ -10,6 +10,16 @@ M.enabled = true
 
 M.setup = function(args) M.config = vim.tbl_deep_extend('force', M.config, args or {}) end
 
+M.build_regexp = function()
+	local hOfhz = '[[:alpha:]]'
+	local zOfhz = '[^\\u0-\\u7f' .. M.config.trailing_zen .. ']'
+	local zOfzh = '[^\\u0-\\u7f' .. M.config.leading_zen .. ']'
+	local hOfzh = '[[:alpha:]]'
+	local pattern = '\\v(' .. hOfhz .. '@<=' .. zOfhz .. ')|(' .. zOfzh .. '@<=' .. hOfzh .. ')'
+
+	return pattern
+end
+
 M.execute = function()
 	local win = vim.api.nvim_get_current_win()
 	local ok, prevmatchid = pcall(vim.api.nvim_win_get_var, win, 'prevmatchid')
@@ -20,13 +30,7 @@ M.execute = function()
 
 	if not M.enabled then return end
 
-	local hOfhz = '[[:alpha:]]'
-	local zOfhz = '[^\\u0-\\u7f' .. M.config.trailing_zen .. ']'
-	local zOfzh = '[^\\u0-\\u7f' .. M.config.leading_zen .. ']'
-	local hOfzh = '[[:alpha:]]'
-	local pattern = '\\v(' .. hOfhz .. '@<=' .. zOfhz .. ')|(' .. zOfzh .. '@<=' .. hOfzh .. ')'
-
-	vim.api.nvim_win_set_var(win, 'prevmatchid', vim.fn.matchadd(M.config.highlight, pattern, 0, -1))
+	vim.api.nvim_win_set_var(win, 'prevmatchid', vim.fn.matchadd(M.config.highlight, M.build_regexp(), 0, -1))
 end
 
 -- あああaaaいいいiii
