@@ -27,12 +27,14 @@ Enabled by default on startup.
 
 ```lua
 return {
-    "shu-vim/hzzh-nvim",
-    opts = {
-        highlight = 'SpellBad',
-        trailing_zen = '」』）】＞',
-        leading_zen = '、。：「『（【＜',
-    }
+  "shu-vim/hzzh-nvim",
+  opts = {
+    highlight = 'SpellBad',
+    trailing_zen = '」』）】＞',
+    leading_zen = '、。：「『（【＜',
+  
+    highlight_enabled = true,
+  }
 }
 ```
 

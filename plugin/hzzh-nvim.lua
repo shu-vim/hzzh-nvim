@@ -5,12 +5,12 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 vim.api.nvim_create_user_command('HZZHEnable', function()
-  M.enabled = true
+  M.config.highlight_enabled = true
   M.execute()
 end, {})
 
 vim.api.nvim_create_user_command('HZZHDisable', function()
-  M.enabled = false
+  M.config.highlight_enabled = false
   M.execute()
 end, {})
 

@@ -4,9 +4,9 @@ M.config = {
   highlight = 'SpellBad',
   trailing_zen = '」』）】＞',
   leading_zen = '、。：「『（【＜',
-}
 
-M.enabled = true
+  highlight_enabled = true,
+}
 
 M.setup = function(args) M.config = vim.tbl_deep_extend('force', M.config, args or {}) end
 
@@ -30,7 +30,7 @@ M.execute = function()
     vim.api.nvim_win_del_var(win, 'prevmatchid')
   end
 
-  if not M.enabled then return end
+  if not M.config.highlight_enabled then return end
 
   vim.api.nvim_win_set_var(win, 'prevmatchid', vim.fn.matchadd(M.config.highlight, M.build_regexp(), 0, -1))
 end
