@@ -1,6 +1,6 @@
 local M = require('hzzh-nvim')
 
-vim.api.nvim_create_autocmd('WinEnter', {
+vim.api.nvim_create_autocmd('BufEnter', {
 	callback = M.execute,
 })
 
