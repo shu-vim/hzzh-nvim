@@ -35,6 +35,47 @@ M.execute = function()
 	vim.api.nvim_win_set_var(win, 'prevmatchid', vim.fn.matchadd(M.config.highlight, M.build_regexp(), 0, -1))
 end
 
+M.add_to_qf = function()
+	local pattern = M.build_regexp()
+
+	local bufnr = vim.api.nvim_get_current_buf()
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+	local qf_items = {}
+	for lnum, line in ipairs(lines) do
+		local col = 0
+		while true do
+			local res = vim.fn.matchstrpos(line, pattern, col)
+			local start_idx = res[2]
+			local end_idx = res[3]
+
+			if start_idx == -1 then break end
+
+			table.insert(qf_items, {
+				bufnr = bufnr,
+				lnum = lnum,
+				col = start_idx + 1,
+				text = line,
+			})
+
+			if end_idx == col then
+				col = col + 1
+			else
+				col = end_idx
+			end
+
+			if col >= #line then break end
+		end
+	end
+
+	if #qf_items > 0 then
+		vim.fn.setqflist(qf_items, 'r')
+		vim.cmd('copen')
+	else
+		vim.notify('No matches found for hzzh.')
+	end
+end
+
 -- あああaaaいいいiii
 -- 「aaa」
 -- 'あああ'

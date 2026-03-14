@@ -16,4 +16,6 @@ end, {})
 
 vim.api.nvim_create_user_command('HZZHSearch', function() M.search() end, {})
 
+vim.api.nvim_create_user_command('HZZHAddQF', function() M.add_to_qf() end, {})
+
 -- vim: set et ft=lua sts=4 sw=4 ts=4 :
