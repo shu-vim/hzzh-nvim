@@ -1,6 +1,9 @@
 local M = require('hzzh-nvim')
 
+local group = vim.api.nvim_create_augroup('hzzh-nvim', { clear = true })
+
 vim.api.nvim_create_autocmd('BufEnter', {
+  group = group,
   callback = M.execute,
 })
 
